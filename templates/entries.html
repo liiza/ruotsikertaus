@@ -1,0 +1,8 @@
+<br/>
+{% for entry in entries %}
+	<h4>{{entry.finnish}}</h4>
+	<input class="user_input" id="{{entry.id}}" size="50">
+        <br/>
+	<br/>
+{% endfor %}
+<button id="evaluate" class="btn btn-default">Tarkista!</button>
