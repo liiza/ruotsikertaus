@@ -20,6 +20,8 @@ $(document).ready(function(){
 			$("#quiz").html(data);
 		});
     });
+
+
 });
 
 

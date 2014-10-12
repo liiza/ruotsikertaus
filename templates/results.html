@@ -2,7 +2,11 @@
 {% for entry in entries %}
 	<h4>{{entry.finnish}}</h4>
 	<h4>Sinun vastauksesi:</h4>
-	<h4 style="color: red;">{{ entry.error }}</h4>
+        {% if entry.error %}
+	<h4 style="color: red;">{{ entry.user_input }}</h4>
+	{% else %}
+ 	<h4 style="color: green;">{{ entry.user_input }}</h4>
+        {% endif %}
 	<h4> Oikea vastaus: </h4>
 	<h4>{{entry.swedish}}</h4>
         <br/>

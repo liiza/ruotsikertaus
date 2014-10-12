@@ -1,0 +1,23 @@
+{% extends "layout.html"%}
+{% from "_formhelpers.html" import render_field %}
+{% block body %}
+    <ul class="nav nav-tabs" role="tablist">
+	<li><a href="/">Kertaa</a></li>
+	<li class="active"><a href="/addentry">Lisää sisältöä</a></li>
+    </ul>
+    <br/>
+    <p>Lisää laadukasta sisältöä palvelua.</p>
+    </br>
+    <form method=post action="/addentry">
+    <dl>
+       {{render_field(form.finnish)}}
+       <br/>
+       {{render_field(form.swedish)}}
+    </dl>
+    <p><input type=submit class="btn btn-default" value=Palauta>
+    </form>
+    <br/>
+{% endblock %}
+
+
+

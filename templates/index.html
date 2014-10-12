@@ -1,7 +1,14 @@
 {% extends "layout.html"%}
 {% block body %}
+    <ul class="nav nav-tabs" role="tablist">
+	<li class="active"><a href="/">Kertaa</a></li>
+	<li><a href="/addentry">Lisää sisältöä</a></li>
+    </ul>
     <br/>
-    <button class="btn btn-default" id="startquiz">Aloita visa!</button>
+    <p>Kertaa ruotsin taitoja ja valmistaudu virkamiesruotsin kokeeseen.
+    Voit myös lisätä palveluun omaa sisältösi.</p>
+    <br/>
+    <button class="btn btn-default" id="startquiz">Aloita testi!</button>
     <br/>
     <div id="quiz"></div>
 {% endblock %}
