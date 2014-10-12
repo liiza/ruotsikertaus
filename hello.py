@@ -29,10 +29,12 @@ def quiz():
 		entry['user_input'] = user_input
 		entry['error'] = user_input != entry['swedish']
 		results.append(entry)
+        results = sorted(results, key=lambda expression: expression['id'] )
     	return render_template('results.html', entries=results)
 
-    all_entries = Expression.query.all()
+    all_entries = Expression.query.order_by(Expression.id).all()
     entries = random.sample(all_entries, 5)
+    entries = sorted(entries, key=lambda expression: expression.id )
     return render_template('entries.html', entries=entries)
 
 @app.route('/addentry', methods=['GET', 'POST'])
