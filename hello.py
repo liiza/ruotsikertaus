@@ -42,7 +42,8 @@ def addentry():
         expression = Expression(finnish, swedish) 
         db.session.add(expression)
         db.session.commit()
-        return render_template('addentry.html', form=form)
+        form = AddEntryForm()
+        return render_template('addentry.html', form=form, success=True)
     return render_template('addentry.html', form=form)
 
 
