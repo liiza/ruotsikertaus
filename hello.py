@@ -3,13 +3,14 @@ import random
 
 from flask import Flask, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
-from forms import AddEntryForm
 
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 db = SQLAlchemy(app)
 
+
+from forms import AddEntryForm
 from models import Expression
 
 @app.route('/')
@@ -30,7 +31,8 @@ def quiz():
 		results.append(entry)
     	return render_template('results.html', entries=results)
 
-    entries = Expression.query.limit(5)
+    all_entries = Expression.query.all()
+    entries = random.sample(all_entries, 5)
     return render_template('entries.html', entries=entries)
 
 @app.route('/addentry', methods=['GET', 'POST'])
