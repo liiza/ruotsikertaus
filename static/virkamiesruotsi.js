@@ -5,6 +5,12 @@ $(document).ready(function(){
 			$("#quiz").html(data);
 		});
     });
+    $("#repeat").click(
+	function() {
+		$.get("/repeat", function(data) {
+			$("#quiz").html(data);
+		});
+    });
 
     $(document).on('click', '#evaluate', 
 	function() {
@@ -20,7 +26,14 @@ $(document).ready(function(){
 			$("#quiz").html(data);
 		});
     });
-
+   
+    $(document).on('click', '.plus',
+        function() {
+	        var id = $(this).attr('id');
+		$.get("/addfavorite/"+id).done(function() {
+			
+		});
+    });
 
 });
 

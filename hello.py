@@ -1,7 +1,8 @@
 import os
 import random
+import string
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 from flask.ext.sqlalchemy import SQLAlchemy
 
 
@@ -11,11 +12,22 @@ db = SQLAlchemy(app)
 
 
 from forms import AddEntryForm
-from models import Expression
+from models import Expression, Favorites
+
+def username_generator(size=10, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 """Render home page. """
 @app.route('/')
 def index():
+    username = request.cookies.get('username')
+    print "username is", username
+    if not username:
+        resp = make_response(render_template('index.html'))
+        username = username_generator()
+        resp.set_cookie('username', username)    
+        return resp
+
     return render_template('index.html')
 
 """Render quiz. User sees finnish sentences and he must give swedish translation.
@@ -42,11 +54,24 @@ def quiz():
         results = sorted(results, key=lambda expression: expression['id'] )
     	return render_template('results.html', entries=results)
 
-    all_entries = Expression.query.order_by(Expression.id).all()
+    entries = Expression.query.all()
     # Select randomly five enries to render.
-    entries = random.sample(all_entries, 5)
+    if len(entries) > 5:
+         entries = random.sample(entries, 5)
     entries = sorted(entries, key=lambda expression: expression.id )
     return render_template('entries.html', entries=entries)
+
+@app.route('/repeat', methods=['GET', 'POST'])
+def repeat():
+    username = request.cookies.get('username')
+    entries = Expression.query.join(Favorites).filter_by(user_name=username).all()
+    # Select randomly five enries to render.
+    if len(entries) > 5:
+         entries = random.sample(entries, 5)
+    entries = sorted(entries, key=lambda expression: expression.id )
+    return render_template('entries.html', entries=entries)
+
+
 
 """Add new entry to database. User provides a swedish and finnish translation."""
 @app.route('/addentry', methods=['GET', 'POST'])
@@ -63,6 +88,15 @@ def addentry():
         # Render user the form again with success message
         return render_template('addentry.html', form=form, success=True)
     return render_template('addentry.html', form=form)
+
+@app.route('/addfavorite/<int:id>')
+def addfavorite(id):
+    username = request.cookies.get('username')
+    if username:
+        favorite = Favorites(username, id)
+        db.session.add(favorite)
+        db.session.commit()
+    return "success" 
 
 
 

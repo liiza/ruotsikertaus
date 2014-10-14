@@ -9,33 +9,18 @@ class Expression(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     finnish = db.Column(db.String())
     swedish = db.Column(db.String())
-
+ 
     def __init__(self, finnish, swedish):
         self.finnish = finnish
         self.swedish = swedish
 
-"""class User(db.Model):
-    __tablename__ = 'user'
+class Favorites(db.Model):
+    __tablename__ = 'favorites'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String())
-
-    def is_active(self):
-	return True
-	
-    def is_authenticated(self):
-	return True
-	
-    def is_anonymous(self):
-	return False
-   
-    def get_id(self):
-	try:
-	    return unicode(self.id)
-	except:
-	    return None
-    
-    def __init__(self, name):
-        self.name = name"""
-
-  
+    expression_id = db.Column(db.Integer, db.ForeignKey('expression.id'))
+    user_name = db.Column(db.String(50))  
+ 
+    def __init__(self, user_name, expression_id):
+        self.user_name = user_name
+        self.expression_id = expression_id
