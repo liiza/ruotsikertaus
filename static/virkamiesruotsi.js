@@ -30,8 +30,19 @@ $(document).ready(function(){
     $(document).on('click', '.plus',
         function() {
 	        var id = $(this).attr('id');
+                var $that = $(this);
 		$.get("/addfavorite/"+id).done(function() {
-			
+		    $that.removeClass("plus");
+	            $that.text("Lisätty")
+                });
+    });
+    $(document).on('click', '.minus',
+        function() {
+	        var id = $(this).attr('id');
+                var $that = $(this);
+		$.get("/removefavorite/"+id).done(function() {
+		    $that.removeClass("minus");
+	            $that.text("Poistettu")
 		});
     });
 

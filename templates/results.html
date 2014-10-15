@@ -2,8 +2,13 @@
 {% for entry in entries %}
 	<div class="panel panel-default">
 	   <div class="panel-body">
-               <button class="plus" id={{entry.id}}>
+               {% if entry.class %}
+               <button class="big_button minus" id={{entry.id}}>
+               <span class="glyphicon glyphicon-minus"></span> Valmis </button>
+               {% else %}
+               <button class="big_button plus" id={{entry.id}}>
                <span class="glyphicon glyphicon-plus"></span> Kertaukseen </button>
+               {% endif %}
                <div class="answer">
                    <h4>{{entry.finnish}}</h4>
                    <h4>Sinun vastauksesi:</h4>

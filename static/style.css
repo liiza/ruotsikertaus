@@ -4,10 +4,11 @@
    padding: 0;
    margin: 0;
 }
-.plus {
+.big_button {
    float: right;
    padding: 7px;
 }
+
 .answer {
    float: left;
 }
