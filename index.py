@@ -68,11 +68,10 @@ def quiz():
     copy_entries = []
     for entry in entries:
         if not entry in entries_to_filter:
-            print "lets remvoe entry", entry
             copy_entries.append(entry)
     entries = copy_entries
 
-    # Select randomly five enries to render.
+    # Select randomly three enries to render.
     if len(entries) > 3:
          entries = random.sample(entries, 3)
     entries = sorted(entries, key=lambda expression: expression.id )
