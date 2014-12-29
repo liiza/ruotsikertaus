@@ -1,7 +1,7 @@
-ruotsikertaus
-=============
+#ruotsikertaus
+
 Palvelu on tarkoitettu ruotsin kertaukseen.
-1. Aloita kertaus valitsemalla Uusi testi.
+1.Aloita kertaus valitsemalla Uusi testi.
 2. Paina Tarkista nähdäksesi oikeat vastaukset.
 3. Tämän jälkeen voit siirtää kertaukseen ne ilmaisut, joita haluaisit kerrata vielä lisää.
 4. Valitsemma Kertaa, pääset kertaamaan näitä juuri näitä ilmaisuja.
